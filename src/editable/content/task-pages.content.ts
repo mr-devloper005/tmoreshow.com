@@ -2,68 +2,123 @@ import type { TaskKey } from '@/lib/site-config'
 
 export type TaskPageVoice = {
   eyebrow: string
+  displayLabel: string
+  displayLabelPlural: string
   headline: string
   description: string
   filterLabel: string
   secondaryNote: string
   chips: string[]
+  emptyTitle: string
+  emptyBody: string
+  ctaLabel: string
 }
 
+/*
+  Voice + display labels per task. Display labels are what the user sees
+  everywhere in the UI — never the raw task key. Underlying task keys stay
+  the same so routes and data fetching keep working.
+*/
 export const taskPageVoices = {
   article: {
-    eyebrow: 'Reading desk',
-    headline: 'Long-form articles with a calmer editorial rhythm.',
-    description: 'Use this page for essays, guides, explainers, and story-led posts. The layout should feel like a publication, not a directory.',
-    filterLabel: 'Choose article topic',
-    secondaryNote: 'Reading surfaces need space, hierarchy, and fewer distractions.',
-    chips: ['Editorial pacing', 'Topic filters', 'Long-read friendly'],
+    eyebrow: 'Editorial',
+    displayLabel: 'Article',
+    displayLabelPlural: 'Articles',
+    headline: 'Long-form reads with a calmer editorial pace.',
+    description: 'Essays, explainers, and story-led posts written for the community.',
+    filterLabel: 'Choose topic',
+    secondaryNote: 'Editorial surfaces need space, hierarchy, and few distractions.',
+    chips: ['Editorial pace', 'Topic filters', 'Long-read friendly'],
+    emptyTitle: 'No stories published yet',
+    emptyBody: 'New editorial pieces will appear here as they are published.',
+    ctaLabel: 'Read the article',
   },
   classified: {
     eyebrow: 'Notice board',
-    headline: 'Fast-moving classifieds, offers, and time-sensitive posts.',
-    description: 'Classified content should feel quick to scan, practical, and action-oriented with less editorial decoration.',
-    filterLabel: 'Filter classified category',
+    displayLabel: 'Notice',
+    displayLabelPlural: 'Notices',
+    headline: 'Fast-moving offers and time-sensitive posts.',
+    description: 'Practical, action-oriented content — quick to scan, easy to reply to.',
+    filterLabel: 'Filter category',
     secondaryNote: 'Prioritize urgency, short summaries, and direct browsing.',
     chips: ['Fast scan', 'Offers', 'Action cues'],
+    emptyTitle: 'No notices yet',
+    emptyBody: 'Fresh notices will appear here once posted.',
+    ctaLabel: 'View notice',
   },
   sbm: {
-    eyebrow: 'Saved resources',
-    headline: 'Social bookmarks arranged like curated collections.',
-    description: 'Bookmark pages should feel like shelves of useful resources, tools, references, and collections.',
+    eyebrow: 'Curated links',
+    displayLabel: 'Bookmark',
+    displayLabelPlural: 'Bookmarks',
+    headline: 'Curated collections of resources and links.',
+    description: 'Shelves of useful tools, references, and links worth revisiting.',
     filterLabel: 'Filter collection',
     secondaryNote: 'Curated resources need grouping and calm metadata.',
-    chips: ['Collections', 'Resources', 'Reference flow'],
+    chips: ['Collections', 'Resources', 'Reference'],
+    emptyTitle: 'No bookmarks yet',
+    emptyBody: 'Curated resources will show up here as they are added.',
+    ctaLabel: 'Open bookmark',
   },
   profile: {
-    eyebrow: 'People and profiles',
+    eyebrow: 'People & profiles',
+    displayLabel: 'Profile',
+    displayLabelPlural: 'Profiles',
     headline: 'Profiles with identity, trust, and reputation cues.',
-    description: 'Profile pages should make people, brands, and entities feel discoverable rather than buried in a generic feed.',
-    filterLabel: 'Filter profile category',
+    description: 'People, brands, and entities — discoverable rather than buried in a feed.',
+    filterLabel: 'Filter profile',
     secondaryNote: 'Make identity and credibility visible before the grid begins.',
-    chips: ['Identity first', 'Trust cues', 'Creator/business cards'],
+    chips: ['Identity first', 'Trust cues', 'Discovery'],
+    emptyTitle: 'No profiles listed',
+    emptyBody: 'Profiles will appear here as members are added.',
+    ctaLabel: 'View profile',
   },
   pdf: {
-    eyebrow: 'Document library',
-    headline: 'PDFs and documents presented as a useful library.',
-    description: 'PDF pages should feel like downloadable guides, reports, files, and reference material instead of normal articles.',
-    filterLabel: 'Filter document type',
-    secondaryNote: 'Document surfaces need archive cues, file context, and clear browsing.',
-    chips: ['Documents', 'Guides', 'Archive ready'],
+    eyebrow: 'Reference Library',
+    displayLabel: 'Reference file',
+    displayLabelPlural: 'Reference Library',
+    headline: 'A working reference library — reports, guides, and files.',
+    description: 'Downloadable material with proper indexing, previews, and context. Save what you need for later.',
+    filterLabel: 'Filter by category',
+    secondaryNote: 'Every file is previewed inline and free to download.',
+    chips: ['Guides', 'Reports', 'Reference sheets'],
+    emptyTitle: 'No files in the library yet',
+    emptyBody: 'New reference material will land here as it is added to the library.',
+    ctaLabel: 'Open reference',
   },
   listing: {
-    eyebrow: 'Business directory',
-    headline: 'Business listings built for discovery and comparison.',
-    description: 'Listing pages should behave like a directory with trust cues, metadata, and a practical search rhythm.',
-    filterLabel: 'Filter business category',
-    secondaryNote: 'Prioritize comparison, location, and direct action paths.',
-    chips: ['Directory', 'Compare', 'Business discovery'],
+    eyebrow: 'Local Directory',
+    displayLabel: 'Directory record',
+    displayLabelPlural: 'Local Directory',
+    headline: 'Trusted places and services in the local directory.',
+    description: 'Verified records with contact details, hours, and location so you can act — not just browse.',
+    filterLabel: 'Filter by category',
+    secondaryNote: 'Each record is contactable, checked, and locally sourced.',
+    chips: ['Verified', 'Local', 'Contactable'],
+    emptyTitle: 'No records in this section yet',
+    emptyBody: 'Directory entries will appear here as they are added.',
+    ctaLabel: 'View record',
   },
   image: {
-    eyebrow: 'Visual gallery',
-    headline: 'Image posts with a gallery-first browsing experience.',
-    description: 'Image pages should lead with visual impact, stronger cards, and a portfolio-like rhythm.',
-    filterLabel: 'Filter visual category',
-    secondaryNote: 'Let images carry the page before long text does.',
-    chips: ['Gallery', 'Visual-first', 'Portfolio mood'],
+    eyebrow: 'Gallery',
+    displayLabel: 'Visual',
+    displayLabelPlural: 'Gallery',
+    headline: 'Image posts with a gallery-first rhythm.',
+    description: 'Visual stories, portfolios, and standout imagery.',
+    filterLabel: 'Filter category',
+    secondaryNote: 'Let images carry the page before text does.',
+    chips: ['Visual', 'Gallery', 'Portfolio'],
+    emptyTitle: 'No visuals in the gallery yet',
+    emptyBody: 'New images and galleries will appear here.',
+    ctaLabel: 'View image',
   },
 } satisfies Record<TaskKey, TaskPageVoice>
+
+/** Display label for a task — the ONLY thing the user should ever see for a task. */
+export function taskDisplayLabel(task: TaskKey): string {
+  return taskPageVoices[task]?.displayLabelPlural || task
+}
+
+/** Singular display label. */
+export function taskDisplayLabelSingular(task: TaskKey): string {
+  return taskPageVoices[task]?.displayLabel || task
+}
